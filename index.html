@@ -3,65 +3,14 @@
 
 <head>
 	<title>VKLike</title>
+	<script src="jquery-3.2.1.js"></script>
+	<script src="scripts.js"></script>
 </head>
 
 <!--https://oauth.vk.com/authorize?client_id=6081052&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=photos,notes,wall,groups,friends&response_type=token&v=5.52-->
 
 <body>
 	<button id="loadLikes">Загрузить лайкнувших</button>
-<script src="jquery-3.2.1.js"></script>
-	<script>
-		$('#loadLikes').on('click', showLikes)
-		var fullRequest = 'https://api.vk.com/method/likes.getList?type=photo&extended=1&count=100&item_id=456289131&owner_id=25240087&access_token=307b0a943e92dca6c3ed09f02bd201a6e8e73444b82bb5af8d71075e870537a23ece57aeb2e225eabfbae&v=5.52'
-
-
-		function showLikes(){
-
-		}
-		function createUrl(){
-			var access_token = '307b0a943e92dca6c3ed09f02bd201a6e8e73444b82bb5af8d71075e870537a23ece57aeb2e225eabfbae'
-			var item_id = '390932'
-			var owner_id = '-25240087'
-			var count = '50'
-			var type = 'post'
-			
-			var request = 'https://api.vk.com/method/likes.getList?type=' + type + '&extended=1' + 
-			'&count=' + count + 
-			'&item_id=' + item_id + 
-			'&owner_id=' + owner_id + 
-			'&access_token=' + access_token + 
-			'&v=5.52'
-
-			return request
-		}
-
-		function sendRequest(){
-			$.ajax({
-				url: createUrl(),
-				method: 'GET',
-				dataType: 'JSONP',
-				succes: function(data){
-					console.log('success function')
-					console.log(JSON.parse(data))
-				},
-				error: function(jqXHR,textStatus,errorThrown){
-					console.log('Error fucntion ' + textStatus)
-				
-				},
-				complete: function(data){
-					console.log('complete')
-					console.log(data["responseJSON"]["response"])
-					showLikes()
-				}
-			})
-		}
-
-		sendRequest()
-
-		
-		
-	</script>
-
 </body>
 
 
