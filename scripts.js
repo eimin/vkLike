@@ -1,8 +1,10 @@
-function getURLForLikes(){
+
+
+function getLikesURL(){
     var params = {
         access_token : '1f5abb90d44b370455b7ed0416d0e8ee6d721bebe742f09aff34ef4c26e6d4f15a2dd6b6751c8ceace53f',
-        item_id : '390932',
-        owner_id : '-25240087',
+        item_id : '196616',
+        owner_id : '-23626127',
         count : '1000',
         type : 'post',
         extended: '1'
@@ -10,21 +12,19 @@ function getURLForLikes(){
     return 'https://api.vk.com/method/likes.getList?' + $.param(params) + '&v=5.52'
 }
 
-function getURLForUsersInfo(user_ids){
+function getUsersURL(user_ids){
     var params = {
          access_token : '1f5abb90d44b370455b7ed0416d0e8ee6d721bebe742f09aff34ef4c26e6d4f15a2dd6b6751c8ceace53f',
          fields: 'sex,city,country,photo_200',
     }
     params.user_ids = user_ids
-    // console.log('getURLUserInfo ')
-    // console.log(params)
-    // console.log('https://api.vk.com/method/users.get?' + $.param(params) + '&v=5.52')
     return 'https://api.vk.com/method/users.get?' + $.param(params) + '&v=5.52'
 }
 
-getLikes = function (){
+function getLikes(){
+    
     $.ajax({
-        url: getURLForLikes(),
+        url: getLikesURL(),
         method: 'GET',
         dataType: 'JSONP',
 
@@ -41,38 +41,36 @@ getLikes = function (){
         complete: function(data){
             console.log('getLikes: complete ')
             console.log(data)
-            var user_ids = ''
+            
             var likes = data["responseJSON"]["response"]["items"]
+            var user_ids = ''
             for(var i = 0; i < 300; i++){
-                //чтобы не пришпилить лишнюю запятую к последнему айдишнику
-                if(i == likes.length-1) 
-                    user_ids += likes[i]["id"]
-                else 
-                    user_ids += likes[i]["id"] + ','       
+                if(i == likes.length-1) user_ids += likes[i]["id"]
+                else user_ids += likes[i]["id"] + ','       
             }
-            getUserInfo(user_ids)
+            getUsers(user_ids)
         }
     })
     
-}()
+}
 
 
-function getUserInfo(user_ids){
+function getUsers(user_ids){
     $.ajax({
-        url: getURLForUsersInfo(user_ids),
+        url: getUsersURL(user_ids),
         method: 'GET',
         dataType: 'JSONP',
         success: function(data){
-            console.log('getUserInfo: success: ')
+            console.log('getUsers: success: ')
             console.log(data)
         },
 
-        error: function(jqXHR,textStatus,errorThrown) {
-            console.log('getUserInfo: error' + textStatus)
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('getUsers: error' + textStatus)
         },
 
         complete: function(data){            
-            console.log('getUserInfo: complete')
+            console.log('getUsers: complete')
             console.log(data)
             showLikes(data["responseJSON"]["response"])
         }

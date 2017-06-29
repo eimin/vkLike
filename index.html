@@ -5,12 +5,26 @@
 	<title>VKLike</title>
 	<script src="jquery-3.2.1.js"></script>
 	<script src="scripts.js"></script>
+	<style>
+		#parameters >* {
+			margin: 10px;
+		}
+	</style>
 </head>
 
 <!--https://oauth.vk.com/authorize?client_id=6081052&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=photos,notes,wall,groups,friends&response_type=token&v=5.52-->
 
 <body>
-	<ul></ul>
+
+	<div id="parameters">
+		<input id="owner_id" type="text" placeholder="owner_id"/>
+		<input id="item_id" type="text" placeholder="item_id"/>
+		<input id="type" type="text" placeholder="type"/>
+		<button id="load">Go</button>	
+	</div>
+
+	<ul id="users"></ul>
+
 </body>
 
 </html>
