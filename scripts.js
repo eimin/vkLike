@@ -1,30 +1,59 @@
+ $("#load").on("click", function(){
+        alert('vse work!')
 
+        var exParams = {
+            owner_id: $('#owner_id').val(),
+            item_id: $('#item_id').val(),
+            type: $('#type').val()
+        }
 
-function getLikesURL(){
+        console.log('click button: ' 
+        + "owner: " + exParams.owner_id 
+        + " item_id: " + exParams.item_id 
+        + " type: " + exParams.type)
+
+        getLikes(exParams)    
+})
+
+function getLikesURL(exParams){
     var params = {
-        access_token : '1f5abb90d44b370455b7ed0416d0e8ee6d721bebe742f09aff34ef4c26e6d4f15a2dd6b6751c8ceace53f',
+        access_token : 'fac6e78c1e8174f5061aec1e89f3e00f442001daee6ab0ee58163010e567749d464bcd5369a355fdec29e',
         item_id : '196616',
         owner_id : '-23626127',
         count : '1000',
         type : 'post',
         extended: '1'
     }
-    return 'https://api.vk.com/method/likes.getList?' + $.param(params) + '&v=5.52'
+    console.log('getLikesURL: exParams: ' + exParams)
+    params.item_id = exParams["item_id"]
+    params.owner_id = exParams.owner_id
+    params.type = exParams.type
+
+    console.log('getLikesURL exParams: ' 
+    + "owner: " + exParams.owner_id 
+    + " item_id: " + exParams.item_id 
+    + " type: " + exParams.type)
+
+     console.log('getLikesURL params: ' 
+    + "owner: " + params.owner_id 
+    + " item_id: " + params.item_id 
+    + " type: " + params.type)
+
+    return 'https://api.vk.com/method/likes.getList?' + $.param(params) + $.param(exParams) + '&v=5.52'
 }
 
 function getUsersURL(user_ids){
     var params = {
-         access_token : '1f5abb90d44b370455b7ed0416d0e8ee6d721bebe742f09aff34ef4c26e6d4f15a2dd6b6751c8ceace53f',
+         access_token : 'fac6e78c1e8174f5061aec1e89f3e00f442001daee6ab0ee58163010e567749d464bcd5369a355fdec29e',
          fields: 'sex,city,country,photo_200',
     }
     params.user_ids = user_ids
     return 'https://api.vk.com/method/users.get?' + $.param(params) + '&v=5.52'
 }
 
-function getLikes(){
-    
+function getLikes(exParams){
     $.ajax({
-        url: getLikesURL(),
+        url: getLikesURL(exParams),
         method: 'GET',
         dataType: 'JSONP',
 
@@ -50,8 +79,7 @@ function getLikes(){
             }
             getUsers(user_ids)
         }
-    })
-    
+    })   
 }
 
 
@@ -98,3 +126,4 @@ function showLikes(likes){
    $('ul').html(html);
    console.log('li count: ' + $('li').length)
 }
+
