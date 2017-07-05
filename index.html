@@ -4,7 +4,7 @@
 <head>
 	<title>VKLike</title>
 	<script src="jquery-3.2.1.js"></script>
-	<script src="scripts.js"></script>
+	<!--<script src="main.js"></script>-->
 	<style>
 		#parameters >* {
 			margin: 10px;
@@ -23,10 +23,37 @@
 		<button id="load">Go</button>	
 	</div>
 
+	<h5>Поиск<h5/>
+	<form action="Пол">
+		<input type="radio" name="gender" value="male"> Мужской<br>
+		<input type="radio" name="gender" value="female"> Женский<br>
+		<input type="radio" name="gender" value="other"> Неважно<br>
+	</form>
+
+	<h5>Возраст</h5>
+	
+	<select name="От" size="5">
+		<option>text1</option>
+		<option>text2</option>
+		<option>text3</option>
+		<option>text4</option>
+		<option>text5</option>
+	</select>
+
+	<select name="До" size="5">
+		<option>text1</option>
+		<option>text2</option>
+		<option>text3</option>
+		<option>text4</option>
+		<option>text5</option>
+	</select>
+	
 	<ul id="users"></ul>
 
 </body>
 
-<script src="scripts.js"></script>
+<script src="view.js"></script>
+<script src="controller.js"></script>
+<script src="main.js"></script>
 
 </html>
